@@ -1,0 +1,12 @@
+# docker-compose.yml
+
+version: '2'
+
+services:
+  myapp:
+    image: myapp
+    container_name: myapp
+    ports:
+      - 8099:80
+    volumes:
+      - ./Data:/app/Data 
