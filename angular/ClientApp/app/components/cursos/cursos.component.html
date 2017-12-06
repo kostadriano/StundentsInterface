@@ -1,0 +1,46 @@
+<div style="font-family: Courier">
+    <h1>Cursos</h1>
+
+    <p>Insira um novo Curso</p>
+
+    <p *ngIf="!forecasts">
+        <em>Loading...</em>
+    </p>
+
+    <form class="form-inline" style="margin-bottom: 10px">
+        <label for="novoCursoNome">Nome</label>
+        <input type="text" style="margin-left:45px;width:auto" class="form-control form-input-inline" [(ngModel)]="novoCursoNome"
+            name="novoCursoNome" />
+
+    </form>
+    <form style="margin-bottom: 20px" class="form-inline">
+        <label for="novoTitulo">Titulo</label>
+        <input type="text" style="margin-left:30px;width:auto" class="form-control form-input-inline" [(ngModel)]="novoTitulo" name="novoTitulo"
+        />
+    </form>
+    <button id="save" style="margin-bottom: 10px" (click)="incluir()" class="btn btn-primary">Salvar</button>
+    
+    <table class='table' *ngIf="forecasts">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Titulo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let forecast of forecasts">
+                <td>{{forecast.id }}</td>
+                <td>{{forecast.nome }}</td>
+                <td>{{forecast.titulo }}</td>
+
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="remover(forecast)">
+                        <span class='glyphicon glyphicon-trash'></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

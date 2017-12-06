@@ -1,0 +1,36 @@
+<div style="font-family: Courier">
+    <h1>Professores</h1>
+
+    <p>Insira um novo Professor</p>
+
+    <p *ngIf="!forecasts">
+        <em>Loading...</em>
+    </p>
+
+    <form class="form-inline">
+        <label for="novoProfessor">Nome</label>
+        <input type="text" style="width:auto" class="form-control form-input-inline" [(ngModel)]="novoProfessor" name="novoProfessor" />
+        <button id="save" style="margin-left:10px" (click)="incluir()" class="btn btn-primary">Salvar</button>
+    </form>
+    <table class='table' *ngIf="forecasts">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="font-family: Monaco,monospace" *ngFor="let forecast of forecasts">
+                <td>{{forecast.id }}</td>
+                <td>{{forecast.nome }}</td>
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="remover(forecast)">
+                        <span class='glyphicon glyphicon-trash'></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

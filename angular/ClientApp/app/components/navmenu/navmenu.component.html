@@ -1,0 +1,75 @@
+<div class='main-nav'>
+    <div class='navbar navbar-inverse'>
+        <div class='navbar-header'>
+            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+                <span class='sr-only'>Toggle navigation</span>
+                <span class='icon-bar'></span>
+                <span class='icon-bar'></span>
+                <span class='icon-bar'></span>
+            </button>
+            <a class='navbar-brand' [routerLink]="['/home']">angular</a>
+        </div>
+        <div class='clearfix'></div>
+        <div class='navbar-collapse collapse'>
+            <ul class='nav navbar-nav'>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/home']">
+                        <span class='glyphicon glyphicon-home'></span> Home
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class='glyphicon glyphicon-th-list'></span>
+                        Ações
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/estados']">
+                                <span class='glyphicon glyphicon-map-marker'></span> Estados
+                            </a>
+                        </li>
+                        <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/cidades']">
+                                <span class='glyphicon glyphicon-home'></span> Cidades
+                            </a>
+                        </li>
+                        <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/cursos']">
+                                <span class='glyphicon glyphicon-student'></span> Cursos
+                            </a>
+                        </li>
+                        <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/professores']">
+                                <span class='glyphicon glyphicon-apple'></span> Professores
+                            </a>
+                        </li>
+                        <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/matriculas']">
+                                <span class='glyphicon glyphicon-folder-open'></span> Matriculas
+                            </a>
+                        </li>
+                        <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/alunos']">
+                                <span class='glyphicon glyphicon-user'></span> Alunos
+                            </a>
+                        </li>
+
+                        <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/turmas']">
+                                <span class='glyphicon glyphicon-list-alt'></span> Turmas
+                            </a>
+                        </li>
+
+                        <li [routerLinkActive]="['link-active']">
+                            <a [routerLink]="['/disciplinas']">
+                                <span class='glyphicon glyphicon-book'></span> Disciplinas
+                            </a>
+                        </li>
+
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

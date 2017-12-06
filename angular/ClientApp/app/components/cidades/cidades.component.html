@@ -1,0 +1,58 @@
+<div style="font-family: Courier">
+    <h1>Cidades</h1>
+
+    <p>Insira uma nova Cidade</p>
+
+    <p *ngIf="!forecasts">
+        <em>Loading...</em>
+    </p>
+
+    <form class="form-inline">
+        <label for="novoCidade">Nome</label>
+        <input type="text" style="margin-left:30px;width:auto" class="form-control form-input-inline" [(ngModel)]="novoCidade" name="novoCidade"
+        />
+        <button id="save" style="margin-left:10px" (click)="incluir()" class="btn btn-primary">Salvar</button>
+
+        <div class="dropdown" style="margin-top:10px" name="dropdownEstado">
+            <label for="dropdownEstado">Estado</label>
+
+            <select #selectElem (change)="setEstado(selectElem.value)" style="margin-left:15px" class="form-control" >
+                <option >Selecione um estado</option>
+                <option *ngFor="let estado of estados" [value]="estado.id">
+                    {{estado.nome}}
+                </option>
+            </select>
+        </div>
+    </form>
+    <table class='table' *ngIf="forecasts">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Estado</th>          
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let forecast of forecasts">
+                <td>{{forecast.id }}</td>
+                <td>{{forecast.nome }}</td>
+                <td>{{forecast.estado.nome}}</td>          
+                
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="remover(forecast)">
+                        <span class='glyphicon glyphicon-trash'></span>
+                    </button>
+                </td>
+            </tr>
+            <thead>
+                <tr>
+                    <th>IdEstado</th>
+                    <th>NomeEstado</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+        </tbody>
+    </table>
+</div>
