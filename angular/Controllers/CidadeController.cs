@@ -42,6 +42,7 @@ namespace angular.Controllers
             {
                 await DbContext.Cidade.AddAsync(value);
                 await DbContext.SaveChangesAsync();
+                value.Estado = await DbContext.Estado.SingleOrDefaultAsync(m => m.Id == value.EstadoId);
                 return Ok(value);
             }
             else
