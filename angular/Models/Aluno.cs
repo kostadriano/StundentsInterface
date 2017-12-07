@@ -10,5 +10,6 @@ namespace angular.models
         public string Email { get; set; }
         public string Telefone { get; set; }
         public Cidade Cidade { get; set; }
+        public Guid CidadeId { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace angular.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await DbContext.Aluno.ToListAsync());
+            return Ok(await DbContext.Aluno.Include(m=> m.Cidade.Estado).ToListAsync());
         }
 
         // GET api/values/5
@@ -42,7 +42,7 @@ namespace angular.Controllers
             {
                 await DbContext.Aluno.AddAsync(value);
                 await DbContext.SaveChangesAsync();
-                return new NoContentResult();
+                return Ok(value);
             }
             else
             {

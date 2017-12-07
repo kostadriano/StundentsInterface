@@ -24,7 +24,7 @@ namespace angular.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await DbContext.Turma.ToListAsync());
+            return Ok(await DbContext.Turma.Include(m=> m.Disciplina).Include(m=> m.Professor).ToListAsync());
         }
 
         // GET api/values/5

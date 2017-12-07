@@ -12,6 +12,8 @@ import {CounterComponent} from './components/counter/counter.component';
 import {CidadesComponent} from './components/cidades/cidades.component';
 import {CursosComponent} from './components/cursos/cursos.component'
 import {ProfessoresComponent} from './components/professores/professores.component'
+import {AlunosComponent} from './components/alunos/alunos.component'
+import {DisciplinasComponent} from './components/disciplinas/disciplinas.component'
 
 @NgModule({
     declarations: [
@@ -22,7 +24,9 @@ import {ProfessoresComponent} from './components/professores/professores.compone
         HomeComponent,
         CidadesComponent,
         CursosComponent,
-        ProfessoresComponent
+        ProfessoresComponent,
+        AlunosComponent,
+        DisciplinasComponent
     ],
     imports: [
         CommonModule, HttpModule, FormsModule, RouterModule.forRoot([
@@ -34,13 +38,18 @@ import {ProfessoresComponent} from './components/professores/professores.compone
                 path: 'home',
                 component: HomeComponent
             }, {
+                path: 'alunos',
+                component: AlunosComponent
+            },{
                 path: 'counter',
                 component: CounterComponent
             }, {
+                path: 'disciplinas',
+                component: DisciplinasComponent
+            }, {
                 path: 'estados',
                 component: EstadosComponent
-            }, 
-            {
+            }, {
                 path: 'cidades',
                 component: CidadesComponent
             },

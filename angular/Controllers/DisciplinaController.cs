@@ -24,7 +24,7 @@ namespace angular.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await DbContext.Disciplina.ToListAsync());
+            return Ok(await DbContext.Disciplina.Include(m => m.Curso).ToListAsync());
         }
 
         // GET api/values/5
@@ -42,7 +42,7 @@ namespace angular.Controllers
             {
                 await DbContext.Disciplina.AddAsync(value);
                 await DbContext.SaveChangesAsync();
-                return new NoContentResult();
+                return Ok(value);
             }
             else
             {

@@ -1,0 +1,81 @@
+<div style="font-family: Courier">
+    <h1>Alunos</h1>
+
+    <p>Insira uma novo Aluno</p>
+
+    <p *ngIf="!forecasts">
+        <em>Loading...</em>
+    </p>
+
+    <form class="form-inline">
+
+        <div class="row">
+            <div class="col-xs-6 col-md-4">
+                <label for="novoAluno">Nome</label>
+                <input type="text" style="margin-left:30px;width:auto" class="form-control form-inline form-input-inline" [(ngModel)]="novoAluno"
+                    name="novoAluno" />
+            </div>
+            <div class="col-xs-6 col-md-4">
+                <label for="novoEndereco">Endereço</label>
+                <input type="text" style="margin-left:auto;width:auto" class="form-control form-input-inline" [(ngModel)]="novoEndereco"
+                    name="novoEndereco" />
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:20px">
+            <div class="col-xs-6 col-md-4">
+                <label for="novoTelefone">Telefone</label>
+                <input type="text" style="margin-left:auto;width:auto" class="form-control form-input-inline" [(ngModel)]="novoTelefone"
+                    name="novoTelefone" />
+            </div>
+            <div class="col-xs-6 col-md-4">
+                <label for="novoEmail">Email</label>
+                <input type="text" style="margin-left:25px;width:auto" class="form-control form-input-inline" [(ngModel)]="novoEmail" name="novoEmail"
+                />
+            </div>
+        </div>
+
+        <div class="dropdown" style="margin-top:20px;" name="dropdownCidade">
+            <label for="selectCidade">Cidade</label>
+
+            <select #selectElem name="selectCidade" (change)="setCidade(selectElem.value)" style="width:auto;margin-left:15px" class="form-control">
+                <option>Selecione um cidade</option>
+                <option *ngFor="let cidade of cidades" [value]="cidade.id">
+                    {{cidade.nome}}
+                </option>
+            </select>
+        </div>
+
+        <button id="save" style="margin-top:10px; right:10px" (click)="incluir()" class="btn btn-primary">Salvar</button>
+
+    </form>
+    <table class='table' *ngIf="forecasts">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Endereço</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Cidade</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let forecast of forecasts">
+                <td>{{forecast.id }}</td>
+                <td>{{forecast.nome }}</td>
+                <td>{{forecast.endereco }}</td>
+                <td>{{forecast.email }}</td>
+                <td>{{forecast.telefone }}</td>
+                <td>{{forecast.cidade.nome}}</td>
+
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="remover(forecast)">
+                        <span class='glyphicon glyphicon-trash'></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
