@@ -42,6 +42,7 @@ namespace angular.Controllers
             {
                 await DbContext.Disciplina.AddAsync(value);
                 await DbContext.SaveChangesAsync();
+                value.Curso = await DbContext.Curso.SingleOrDefaultAsync(m=> m.Id == value.CursoId);
                 return Ok(value);
             }
             else

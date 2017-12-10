@@ -52,23 +52,25 @@
     <table class='table' *ngIf="forecasts">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nome</th>
                 <th>Endereço</th>
                 <th>Email</th>
                 <th>Telefone</th>
                 <th>Cidade</th>
+                <th>Estado</th>
+                
                 <th></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let forecast of forecasts">
-                <td>{{forecast.id }}</td>
                 <td>{{forecast.nome }}</td>
                 <td>{{forecast.endereco }}</td>
                 <td>{{forecast.email }}</td>
                 <td>{{forecast.telefone }}</td>
                 <td>{{forecast.cidade.nome}}</td>
+                <td>{{forecast.cidade.estado.nome}}</td>
+                
 
                 <td>
                     <button type="button" class="btn btn-danger" (click)="remover(forecast)">

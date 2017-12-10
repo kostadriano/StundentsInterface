@@ -24,9 +24,23 @@ namespace angular.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await DbContext.Turma.Include(m=> m.Disciplina).Include(m=> m.Professor).ToListAsync());
+            return Ok(await DbContext.Turma
+            .Include(m => m.Professor)
+            .Include(m => m.Disciplina)
+            .ThenInclude(m => m.Curso).ToListAsync());
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetTurma()
+        {
+            return Ok(await DbContext.Turma
+           .Select(m => new
+           {
+               DisciplinaNome = m.Disciplina.Nome,
+               ProfessorNome = m.Professor.Nome
+           })
+           .ToListAsync());
+        }
         // GET api/values/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id) //read
@@ -72,7 +86,7 @@ namespace angular.Controllers
             updateValue.Vagas = value.Vagas;
             updateValue.Disciplina = value.Disciplina;
             updateValue.Professor = value.Professor;
-            
+
 
             DbContext.Turma.Update(updateValue);
             await DbContext.SaveChangesAsync();
