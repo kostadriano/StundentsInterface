@@ -9,6 +9,9 @@ import {NgModel} from '@angular/forms'
     public alunoSelecionado:number;
     public turmaSelecionado:number;    
     public turmas: any[];
+    public matricula: any;
+
+    public edit = false;
 
     constructor(private http : Http, @Inject('BASE_URL') private baseUrl : string) {
         
@@ -24,7 +27,6 @@ import {NgModel} from '@angular/forms'
             this.alunos = result.json() as any[];
         }, error => console.error(error));
 
-
         http
             .get(baseUrl + 'api/Matricula')
             .subscribe(result => {
@@ -35,12 +37,27 @@ import {NgModel} from '@angular/forms'
         //Json.stringfy()
 
     public incluir() {
-        var now = new Date();
-            var novoMatriculaSend = {turmaId:this.turmaSelecionado,alunoId:this.alunoSelecionado}
+
+        if(!this.edit){ 
+        var novoMatriculaSend = {turmaId:this.turmaSelecionado,alunoId:this.alunoSelecionado}
             
             this.http
             .post(this.baseUrl + 'api/Matricula',novoMatriculaSend).subscribe(result => 
                 {this.forecasts.push(result.json())});  
+        }
+        else{
+            this.matricula.alunoId = this.alunoSelecionado;
+            this.matricula.turmaId = this.turmaSelecionado;
+
+            let index = this.forecasts.indexOf(this.matricula);
+
+            this.http
+            .put(this.baseUrl + `api/matricula/${this.matricula.id}`, this.matricula)
+            .subscribe(result => {
+            this.forecasts[index] = result.json();
+            })
+            this.clear();
+        }  
     }
 
     public setTurma(turma:number){
@@ -49,6 +66,16 @@ import {NgModel} from '@angular/forms'
     
     public setAluno(aluno:number){
         this.alunoSelecionado = aluno;
+    }
+
+    public clear(){
+        this.edit = false;
+    }
+
+ 
+    public editar(matricula:any){
+        this.matricula = matricula;
+        this.edit = true;
     }
 
     public remover(matricula:any){

@@ -72,7 +72,7 @@ namespace angular.Controllers
 
             DbContext.Curso.Update(updateValue);
             await DbContext.SaveChangesAsync();
-            return new NoContentResult();
+            return Ok(updateValue);
         }
 
         // DELETE api/values/5

@@ -8,9 +8,9 @@
     </p>
 
     <form class="form-inline" style="margin-bottom: 10px">
-        <label for="novoCursoNome">Nome</label>
-        <input type="text" style="margin-left:45px;width:auto" class="form-control form-input-inline" [(ngModel)]="novoCursoNome"
-            name="novoCursoNome" />
+        <label for="cursoNome">Nome</label>
+        <input type="text" style="margin-left:45px;width:auto" class="form-control form-input-inline" [(ngModel)]="cursoNome" name="cursoNome"
+        />
 
     </form>
     <form style="margin-bottom: 20px" class="form-inline">
@@ -18,14 +18,16 @@
         <input type="text" style="margin-left:30px;width:auto" class="form-control form-input-inline" [(ngModel)]="novoTitulo" name="novoTitulo"
         />
     </form>
-    <button id="save" style="margin-bottom: 10px" (click)="incluir()" class="btn btn-primary">Salvar</button>
-    
+    <button id="save" (click)="incluir()" class="btn btn-primary">Salvar</button>
+    <button id="clear" (click)="clear()" class="btn btn-secoundary">Limpar</button>
+
     <table class='table' *ngIf="forecasts">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nome</th>
                 <th>Titulo</th>
+                <th></th>
                 <th></th>
             </tr>
         </thead>
@@ -34,7 +36,12 @@
                 <td>{{forecast.id }}</td>
                 <td>{{forecast.nome }}</td>
                 <td>{{forecast.titulo }}</td>
-
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="editar(forecast)">
+                        Edit
+                        <span class='glyphicon glyphicon-edit'></span>
+                    </button>
+                </td>
                 <td>
                     <button type="button" class="btn btn-danger" (click)="remover(forecast)">
                         <span class='glyphicon glyphicon-trash'></span>

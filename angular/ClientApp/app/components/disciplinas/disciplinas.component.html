@@ -30,27 +30,31 @@
         </div>
         <div class="form-item">
             <button id="save" style="margin-top:20px" (click)="incluir()" class="btn btn-primary">Salvar</button>
+            <button id="clear" style="margin-top:20px" (click)="clear()" class="btn btn-secoundary">Limpar</button>                         
         </div>
 
     </form>
     <table class='table' *ngIf="forecasts">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nome</th>
                 <th>CH</th>
                 <th>Curso</th>
                 <th></th>
+                <th></th>                
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let forecast of forecasts">
-                <td>{{forecast.id }}</td>
                 <td>{{forecast.nome }}</td>
                 <td>{{forecast.cargaHoraria }}</td>
                 <td>{{forecast.curso.nome}}</td>
-
+                <td></td>
                 <td>
+                    <button type="button" class="btn btn-primary" (click)="editar(forecast)">
+                        Edit
+                        <span class='glyphicon glyphicon-edit'></span>
+                    </button>
                     <button type="button" class="btn btn-danger" (click)="remover(forecast)">
                         <span class='glyphicon glyphicon-trash'></span>
                     </button>

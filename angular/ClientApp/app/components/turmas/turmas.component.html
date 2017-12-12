@@ -48,12 +48,8 @@
                 />
             </div>
         </div>
-
-      
-
-
-        <button id="save" style="margin-top:10px; right:10px" (click)="incluir()" class="btn btn-primary">Salvar</button>
-
+        <button id="save" style="margin-top:20px; right:10px" (click)="incluir()" class="btn btn-primary">Salvar</button>
+        <button id="clear" style="margin-top:20px" (click)="clear()" class="btn btn-secoundary">Limpar</button>
     </form>
     <table class='table' *ngIf="forecasts">
         <thead>
@@ -74,6 +70,10 @@
                 <td>{{forecast.professor.nome }}</td>
                 <td>{{forecast.disciplina.nome}}</td>
                 <td>
+                    <button type="button" class="btn btn-primary" (click)="editar(forecast)">
+                        Edit
+                        <span class='glyphicon glyphicon-edit'></span>
+                    </button>
                     <button type="button" class="btn btn-danger" (click)="remover(forecast)">
                         <span class='glyphicon glyphicon-trash'></span>
                     </button>

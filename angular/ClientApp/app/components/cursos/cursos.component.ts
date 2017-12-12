@@ -6,9 +6,13 @@ import {NgModel} from '@angular/forms'
     
     public forecasts : Curso[];
 
-    public novoCursoNome: string;
+    public curso: any;
+
+    public cursoNome: string;
 
     public novoTitulo: string;
+
+    public edit = false;
 
     constructor(private http : Http, @Inject('BASE_URL') private baseUrl : string) {
 
@@ -20,11 +24,31 @@ import {NgModel} from '@angular/forms'
         }
 
     public incluir() {     
-        var novoCursoSend = {nome:this.novoCursoNome,titulo:this.novoTitulo}
+        
+        if(!this.edit){
+        var novoCursoSend = {nome:this.cursoNome,titulo:this.novoTitulo}
+        this.cursoNome ="";
+        this.novoTitulo = "";
 
         this.http
         .post(this.baseUrl + 'api/Curso',novoCursoSend).subscribe(result => 
             { this.forecasts.push(result.json())});
+        }
+        else{
+            this.curso.nome=this.cursoNome;
+            this.curso.titulo= this.novoTitulo;
+
+            let index = this.forecasts.indexOf(this.curso);
+
+            this.http
+            .put(this.baseUrl + `api/curso/${this.curso.id}`, this.curso)
+            .subscribe(result => {
+            this.forecasts[index] = result.json();
+            })
+            this.cursoNome = "";
+            this.novoTitulo="";
+            this.edit = false;
+        }    
     }
 
     public remover(curso:Curso){
@@ -34,6 +58,20 @@ import {NgModel} from '@angular/forms'
                 this.forecasts.splice(index,1);  
             }
         });
+    }
+
+    public clear(){
+        this.cursoNome = "";
+        this.novoTitulo = "";
+        this.edit = false;
+    }
+
+ 
+    public editar(curso:any){
+        this.curso = curso;
+        this.novoTitulo = curso.titulo;
+        this.cursoNome = curso.nome;
+        this.edit = true;
     }
 
 }

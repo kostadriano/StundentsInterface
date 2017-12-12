@@ -19,6 +19,7 @@ import {NgModel} from '@angular/forms'
     public incluir() {
         if(this.edit == false){
             var value = {nome: this.estadoNome}
+            this.estadoNome = "";
             
             this.http
             .post(this.baseUrl + 'api/Estado', value)
@@ -36,6 +37,7 @@ import {NgModel} from '@angular/forms'
             .subscribe(result => {
             this.forecasts[index] = result.json();
             })
+            this.estadoNome = "";
         }
 
     }

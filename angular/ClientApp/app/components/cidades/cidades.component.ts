@@ -34,22 +34,14 @@ import {NgModel} from '@angular/forms'
         }
         else if(this.edit == false){
             var cidadeNomeSend = {nome:this.cidadeNome,estadoId:this.estadoSelecionado}
-            
+            this.cidadeNome = "";
+
             this.http
             .post(this.baseUrl + 'api/Cidade',cidadeNomeSend).subscribe(result => 
                 {this.forecasts.push(result.json())});
         }
         else{
-
-            let indexEstado;
-            for(let estado of this.estados){
-                if(estado.id == this.estadoSelecionado){
-                    indexEstado = estado.id;
-                }
-            }
-
             this.cidade.nome=this.cidadeNome;
-            this.cidade.estado = this.estados[indexEstado];
             this.cidade.estadoId = this.estadoSelecionado;
 
             let index = this.forecasts.indexOf(this.cidade);
@@ -59,6 +51,8 @@ import {NgModel} from '@angular/forms'
             .subscribe(result => {
             this.forecasts[index] = result.json();
             })
+            this.cidadeNome = "";
+            this.edit = false;
         }    
     }
 

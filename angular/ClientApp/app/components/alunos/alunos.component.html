@@ -45,9 +45,8 @@
                 </option>
             </select>
         </div>
-
-        <button id="save" style="margin-top:10px; right:10px" (click)="incluir()" class="btn btn-primary">Salvar</button>
-
+        <button id="save" style="margin-top:20px; right:10px" (click)="incluir()" class="btn btn-primary">Salvar</button>        
+        <button id="clear" style="margin-top:20px" (click)="clear()" class="btn btn-secoundary">Limpar</button>                     
     </form>
     <table class='table' *ngIf="forecasts">
         <thead>
@@ -58,7 +57,6 @@
                 <th>Telefone</th>
                 <th>Cidade</th>
                 <th>Estado</th>
-                
                 <th></th>
             </tr>
         </thead>
@@ -73,9 +71,14 @@
                 
 
                 <td>
+                    <button type="button" class="btn btn-primary" (click)="editar(forecast)">
+                        Edit
+                        <span class='glyphicon glyphicon-edit'></span>
+                    </button>
                     <button type="button" class="btn btn-danger" (click)="remover(forecast)">
                         <span class='glyphicon glyphicon-trash'></span>
                     </button>
+
                 </td>
             </tr>
         </tbody>

@@ -70,11 +70,12 @@ namespace angular.Controllers
 
             updateValue.Nome = value.Nome;
             updateValue.CargaHoraria = value.CargaHoraria;
-            updateValue.Curso = value.Curso; 
+            updateValue.CursoId = value.CursoId;
+            updateValue.Curso = await DbContext.Curso.FirstOrDefaultAsync(t => t.Id == value.CursoId); 
 
             DbContext.Disciplina.Update(updateValue);
             await DbContext.SaveChangesAsync();
-            return new NoContentResult();
+            return Ok(updateValue);
         }
 
         // DELETE api/values/5

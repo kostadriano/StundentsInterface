@@ -74,13 +74,13 @@ namespace angular.Controllers
             updateValue.Dia = value.Dia; //update name
             updateValue.Sala = value.Sala;
             updateValue.Vagas = value.Vagas;
-            updateValue.Disciplina = value.Disciplina;
-            updateValue.Professor = value.Professor;
+            updateValue.Professor = await DbContext.Professor.SingleOrDefaultAsync(m => m.Id == value.ProfessorId);
+            updateValue.Disciplina = await DbContext.Disciplina.SingleOrDefaultAsync(m => m.Id == value.DisciplinaId);
 
 
             DbContext.Turma.Update(updateValue);
             await DbContext.SaveChangesAsync();
-            return new NoContentResult();
+            return Ok(updateValue);
         }
 
         // DELETE api/values/5

@@ -1,15 +1,19 @@
 import {Component, Inject} from '@angular/core';
 import {Http} from '@angular/http';
 import {NgModel} from '@angular/forms'
+import { empty } from 'rxjs/Observer';
 @Component({selector: 'turmas', templateUrl: './turmas.component.html'})export class TurmasComponent {
     
     public forecasts : Turma[];
     public disciplinas: any[];
     public professores: any[];
+    public turma:any;
 
     public professorSelecionado:number;
     public disciplinaSelecionado:number;
     
+    public edit = false;
+
     public novoDia: number;
     public novoSala: string;
     public novoVagas: number;
@@ -39,12 +43,32 @@ import {NgModel} from '@angular/forms'
         //Json.stringfy()
 
     public incluir() {
+        if(!this.edit){    
             var novoTurmaSend = {sala:this.novoSala,dia:this.novoDia,vagas:this.novoVagas,
                 professorId:this.professorSelecionado, disciplinaId:this.disciplinaSelecionado}
             
             this.http
             .post(this.baseUrl + 'api/Turma',novoTurmaSend).subscribe(result => 
                 {this.forecasts.push(result.json())});
+            
+            this.clear();
+        }
+        else{
+            this.turma.sala = this.novoSala;
+            this.turma.dia = this.novoDia;
+            this.turma.vagas = this.novoVagas;
+            this.turma.professorId = this.professorSelecionado;
+            this.turma.disciplinaId = this.disciplinaSelecionado;
+
+            let index = this.forecasts.indexOf(this.turma);
+
+            this.http
+            .put(this.baseUrl + `api/turma/${this.turma.id}`, this.turma)
+            .subscribe(result => {
+            this.forecasts[index] = result.json();
+            })
+            this.clear();
+        }            
     }
 
     public setProfessor(professor:number){
@@ -64,7 +88,26 @@ import {NgModel} from '@angular/forms'
             }
         });
     };
+    
+    public clear(){
+        this.novoDia = 0;
+        this.novoSala = "";
+        this.novoVagas = 0;
+        this.edit = false;
+    }
+
+ 
+    public editar(turma:any){
+        this.turma = turma;
+        this.novoDia = turma.dia;
+        this.novoSala = turma.sala;
+        this.novoVagas = turma.vagas;
+        this.edit = true;
+    }
+
 }
+
+
 
 interface Turma {
     id : number;
@@ -73,6 +116,6 @@ interface Turma {
     vagas:number;
     professor:any;
     professorId:number;
-    cidade: any;
+    turma: any;
     cidadeId:number;
 }
