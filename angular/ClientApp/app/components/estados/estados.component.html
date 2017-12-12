@@ -8,9 +8,10 @@
     </p>
 
     <form class="form-inline">
-        <label for="novoEstado">Nome</label>
-        <input type="text" style="width:auto" class="form-control form-input-inline" [(ngModel)]="novoEstado" name="novoEstado" />
+        <label for="estadoNome">Nome</label>
+        <input [(ngModel)]="estadoNome" type="text" style="width:auto" id="inputEstado" class="form-control form-input-inline"  name="estadoNome"/>
         <button id="save" style="margin-left:10px" (click)="incluir()" class="btn btn-primary">Salvar</button>
+        <button id="clear" style="margin-left:10px" (click)="clear()" class="btn btn-secoundary">Limpar</button> 
     </form>
     <table class='table' *ngIf="forecasts">
         <thead>
@@ -18,12 +19,18 @@
                 <th>Id</th>
                 <th>Nome</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr style="font-family: Monaco,monospace" *ngFor="let forecast of forecasts">
                 <td>{{forecast.id}}</td>
                 <td>{{forecast.nome }}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" (click)="editar(forecast)">
+                        <span class='glyphicon glyphicon-edit'></span>
+                    </button>
+                </td>
                 <td>
                     <button type="button" class="btn btn-danger" (click)="remover(forecast)">
                         <span class='glyphicon glyphicon-trash'></span>

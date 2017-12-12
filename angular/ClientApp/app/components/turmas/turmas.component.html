@@ -1,0 +1,84 @@
+<div style="font-family: Courier">
+    <h1>Turmas</h1>
+
+    <p>Insira uma novo Turma</p>
+
+    <p *ngIf="!forecasts">
+        <em>Loading...</em>
+    </p>
+
+    <form class="form-inline">
+
+        <div class="row">
+            <div class="col-xs-4 col-md-5">
+                <label for="novoTurma">Dia</label>
+                <input type="number" style="margin-left:30px;width:auto" class="form-control form-inline form-input-inline" [(ngModel)]="novoDia"
+                    name="novoDia" />
+
+                <div class="dropdown" style="margin-top:20px;" name="dropdownProfessor">
+                    <label for="selectProfessor">Professor</label>
+
+                    <select #selectProfessor name="selectProfessor" (change)="setProfessor(selectProfessor.value)" style="width:auto;margin-left:15px"
+                        class="form-control">
+                        <option>Selecione um professor</option>
+                        <option *ngFor="let professor of professores" [value]="professor.id">
+                            {{professor.nome}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-5">
+                <label for="novoSala">Sala</label>
+                <input type="text" style="margin-left:auto;width:auto" class="form-control form-input-inline" [(ngModel)]="novoSala" name="novoSala"
+                />
+                <div class="dropdown" style="margin-top:20px;" name="dropdownDisciplina">
+                    <label for="selectDisciplina">Disciplina</label>
+                    <select #selectDisciplina name="selectDisciplina" (change)="setDisciplina(selectDisciplina.value)" style="width:auto;margin-left:15px"
+                        class="form-control">
+                        <option>Selecione um disciplina</option>
+                        <option *ngFor="let disciplina of disciplinas" [value]="disciplina.id">
+                            {{disciplina.nome}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-4" style="margin-top:20px">
+                <label for="novoVagas">Vagas</label>
+                <input type="number" style="margin-left:auto;width:auto" class="form-control form-input-inline" [(ngModel)]="novoVagas" name="novoVagas"
+                />
+            </div>
+        </div>
+
+      
+
+
+        <button id="save" style="margin-top:10px; right:10px" (click)="incluir()" class="btn btn-primary">Salvar</button>
+
+    </form>
+    <table class='table' *ngIf="forecasts">
+        <thead>
+            <tr>
+                <th>Dia</th>
+                <th>Sala</th>
+                <th>Vagas</th>
+                <th>Professor</th>
+                <th>Disciplia</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let forecast of forecasts">
+                <td>{{forecast.dia }}</td>
+                <td>{{forecast.sala }}</td>
+                <td>{{forecast.vagas }}</td>
+                <td>{{forecast.professor.nome }}</td>
+                <td>{{forecast.disciplina.nome}}</td>
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="remover(forecast)">
+                        <span class='glyphicon glyphicon-trash'></span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

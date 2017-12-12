@@ -61,7 +61,7 @@ namespace angular.Controllers
                 return BadRequest();
             }
 
-            var updateValue = await DbContext.Cidade.FirstOrDefaultAsync(t => t.Id == id);
+            var updateValue = await DbContext.Cidade.SingleOrDefaultAsync(t => t.Id == id);
 
             if (updateValue == null)
             {
@@ -69,11 +69,12 @@ namespace angular.Controllers
             }
 
             updateValue.Nome = value.Nome;
-            updateValue.Estado = value.Estado;
+            updateValue.EstadoId = value.EstadoId;
+            updateValue.Estado = await DbContext.Estado.SingleOrDefaultAsync(m => m.Id == value.EstadoId);
 
             DbContext.Cidade.Update(updateValue);
             await DbContext.SaveChangesAsync();
-            return new NoContentResult();
+            return Ok(updateValue);
         }
 
         // DELETE api/values/5

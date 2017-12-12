@@ -29,18 +29,6 @@ namespace angular.Controllers
             .Include(m => m.Disciplina)
             .ThenInclude(m => m.Curso).ToListAsync());
         }
-
-        [HttpGet]
-        public async Task<IActionResult> GetTurma()
-        {
-            return Ok(await DbContext.Turma
-           .Select(m => new
-           {
-               DisciplinaNome = m.Disciplina.Nome,
-               ProfessorNome = m.Professor.Nome
-           })
-           .ToListAsync());
-        }
         // GET api/values/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id) //read
@@ -56,7 +44,9 @@ namespace angular.Controllers
             {
                 await DbContext.Turma.AddAsync(value);
                 await DbContext.SaveChangesAsync();
-                return new NoContentResult();
+                value.Professor = await DbContext.Professor.SingleOrDefaultAsync(m => m.Id == value.ProfessorId);
+                value.Disciplina = await DbContext.Disciplina.SingleOrDefaultAsync(m => m.Id == value.DisciplinaId);
+                return Ok(value);
             }
             else
             {

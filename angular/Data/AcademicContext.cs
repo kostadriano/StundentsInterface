@@ -26,20 +26,10 @@ namespace angular.Data
         {
             const string path = "./Data/database.sqlite";
 
-            if(File.Exists(path)){
-                File.Delete(path);
-            }
-
             var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
             var dataContext = serviceScope.ServiceProvider.GetRequiredService<AcademicContext>();
             dataContext.Database.EnsureCreated();
 
-
-            dataContext.Estado.Add(new Estado{Nome = "Parana"});
-            dataContext.Professor.Add(new Professor{Nome="Tony"});
-            dataContext.Curso.Add(new Curso{Nome="CC",Titulo="Bacharel"});
-
-            
             dataContext.SaveChanges();
 
         }

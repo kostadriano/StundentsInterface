@@ -42,6 +42,8 @@ namespace angular.Controllers
             {
                 await DbContext.Matricula.AddAsync(value);
                 await DbContext.SaveChangesAsync();
+                value.Aluno = (await DbContext.Aluno.SingleOrDefaultAsync(m => m.Id == value.AlunoId));
+                value.Turma = (await DbContext.Turma.SingleOrDefaultAsync(m => m.Id == value.TurmaId));
                 return Ok(value);
             }
             else
@@ -67,8 +69,6 @@ namespace angular.Controllers
                 return NotFound();
             }
 
-            updateValue.Dt_Matricula = value.Dt_Matricula;
-            updateValue.Hora = value.Hora;
             updateValue.Turma = value.Turma;
             updateValue.Aluno = value.Aluno;
 

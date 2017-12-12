@@ -14,6 +14,8 @@ import {CursosComponent} from './components/cursos/cursos.component'
 import {ProfessoresComponent} from './components/professores/professores.component'
 import {AlunosComponent} from './components/alunos/alunos.component'
 import {DisciplinasComponent} from './components/disciplinas/disciplinas.component'
+import {TurmasComponent} from './components/turmas/turmas.component'
+import {MatriculasComponent} from './components/matriculas/matriculas.component'
 
 @NgModule({
     declarations: [
@@ -26,7 +28,9 @@ import {DisciplinasComponent} from './components/disciplinas/disciplinas.compone
         CursosComponent,
         ProfessoresComponent,
         AlunosComponent,
-        DisciplinasComponent
+        DisciplinasComponent,
+        TurmasComponent,
+        MatriculasComponent
     ],
     imports: [
         CommonModule, HttpModule, FormsModule, RouterModule.forRoot([
@@ -37,7 +41,13 @@ import {DisciplinasComponent} from './components/disciplinas/disciplinas.compone
             }, {
                 path: 'home',
                 component: HomeComponent
-            }, {
+            },{
+                path: 'matriculas',
+                component: MatriculasComponent
+            },{
+                path: 'turmas',
+                component: TurmasComponent
+            },{
                 path: 'alunos',
                 component: AlunosComponent
             },{
